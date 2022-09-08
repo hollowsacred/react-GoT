@@ -1,0 +1,41 @@
+@import './reset';
+@import './header';
+@import './randomChar';
+@import './itemList';
+@import './charDetails';
+
+body {
+    background: url('https://images2.alphacoders.com/517/517167.jpg') center no-repeat;
+    background-size: cover;
+    height: 100vh;
+}
+
+.app a {
+	color: inherit;
+    text-decoration: none;
+}
+a:visited {
+    text-decoration: none;
+    color: inherit;
+}
+a:hover {
+    text-decoration: none;
+    color: inherit;
+}
+a:focus {
+    text-decoration: none;
+    color: inherit;
+}
+a:active {
+    text-decoration: none;
+    color: inherit;
+}
+.btn-toggle {
+    border: 5px solid black;
+    border-top: none;
+    border-right: none;
+    transition: all 0.2s ease;
+    &:hover {
+        background-color: cadetblue;
+    }
+}
