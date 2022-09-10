@@ -1,4 +1,5 @@
 
+
 class GotService {
 
     apiBase = 'https://anapioficeandfire.com/api';
@@ -14,6 +15,9 @@ class GotService {
 
     getCharacter<T>(id: string | number) {
         return this.fetchGetData<T>(`/characters/${id}`);
+    }
+    getAllCharacters<T>() {
+        return this.fetchGetData<T>('/characters?page=2&pageSize=11');
     }
 }
 

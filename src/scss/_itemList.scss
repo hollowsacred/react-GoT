@@ -1,3 +1,9 @@
 .item-list .list-group-item {
+    box-sizing: border-box;
     cursor: pointer;
+    transition: background 0.4s ease;
+    &:hover {
+        background-color: #3e89fa31;
+        border:1px solid black;
+    }
 }

@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
-import GotService from "../services/GotService";
-import ErrorMessage from "./ErrorMessage";
+import GotService from "../../services/GotService";
+import ErrorMessage from "../ErrorMessage/ErrorMessage";
 
- interface iPerson {
+ export interface iPerson {
     name: string,
     gender: string,
     born: string,
@@ -19,6 +19,15 @@ interface ViewProps {
 }
 
 
+export function checkNull(person: iPerson) {
+    for (let [key, value] of Object.entries(person)) {
+        if (!value) {
+            person[key as keyof iPerson] = "Данные Отсутствуют";
+           
+        }
+}
+}
+
 
 let serviceObj = new GotService();
 
@@ -28,13 +37,20 @@ const RandomChar:React.FC = () => {
     const [loading, setLoad] = useState(true);
     const [error, setError] = useState(false);
     useEffect(() => {
+
+     const timerid = setInterval(() => {
         changePerson().then(res => {
             setPerson(res);
             setLoad(false);
         }).catch(onError);
+
+       },2000);
+       return () => {clearInterval(timerid); console.log('unmount')};
+       
         // setInterval(() => changePerson().then(res => setPerson(res)),5000);
-        
     },[])
+
+    
 
     const onError = (err: Error) => {
         setError(true);
@@ -45,16 +61,18 @@ const RandomChar:React.FC = () => {
     // }
 
    async function changePerson() {
+    console.log('update');
         let id = Math.floor(Math.random() * 140 + 25);
         console.log(id);
         let person = await serviceObj.getCharacter<iPerson>(id);
-        
-        for (let [key, value] of Object.entries(person)) {
-                if (!value) {
-                    person[key as keyof iPerson] = "Данные Отсутствуют";
-                    console.log('fsdf');
-                }
-        }
+       
+        checkNull(person);
+        // for (let [key, value] of Object.entries(person)) {
+        //         if (!value) {
+        //             person[key as keyof iPerson] = "Данные Отсутствуют";
+                   
+        //         }
+        // }
 
         return person;
     }

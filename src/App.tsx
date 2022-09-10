@@ -1,20 +1,37 @@
-import React, {useState} from 'react';
+import React, {MouseEventHandler, useState} from 'react';
 import {Container, Row, Col} from 'reactstrap'
-import CharDetails from './components/CharDetails';
-import Header from './components/Header';
-import ItemList from './components/ItemList';
-import RandomChar from './components/RandomChar';
+import CharacterPage from './components/CharacterPage/CharacterPage';
+import CharDetails from './components/CharDetails/CharDetails';
+import Header from './components/Header/Header';
+import ItemList from './components/ItemList/ItemList';
+import RandomChar, {checkNull, iPerson} from './components/RandomChar/RandomChar';
+
+
 import './scss/style.scss';
 
 function App() {
 
-const [clicked, setClick] = useState(true);
-
+const [showRandomChar, setShowRandomChar] = useState(true);
+const [selectedChar, setSelectedChar] = useState<iPerson>({} as iPerson);
  function onClick ()  {
-  setClick(!clicked);
+  setShowRandomChar(!showRandomChar);
 }
 
+// const selectChar:MouseEventHandler<HTMLLIElement> = (person: iPerson) => {
+//   setSelectedChar(person)
+// }
+
+function selectChar(person: iPerson) {
+  checkNull(person);
+  setSelectedChar(person);
+  console.log('Кликнули наконец то......')
+  
+}
+
+
+
   return (
+    
     <div className='app'>
     <Container>
       <Header />
@@ -23,7 +40,7 @@ const [clicked, setClick] = useState(true);
       <Row>
         <Col lg={{size:5,offset:0}}>
           { 
-         clicked &&  <RandomChar />
+         showRandomChar &&  <RandomChar />
             }
         </Col>
       </Row>
@@ -32,18 +49,12 @@ const [clicked, setClick] = useState(true);
           <button onClick={onClick} className='btn-toggle'>Toggle Random Person</button>
         </Col>
       </Row>
-      <Row>
-        <Col md="6">
-          <ItemList />
-        </Col>
-        <Col md="6">
-            <CharDetails />
-        </Col>
-      </Row>
+          <CharacterPage selectChar={selectChar} selectedChar={selectedChar}/>
     </Container>
     </div>
     
   );
+          
 }
 
 export default App;
