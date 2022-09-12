@@ -1,36 +1,39 @@
+import React from 'react';
+import { IBook, IHouses, IItems } from "../../App";
 import { iPerson } from "../RandomChar/RandomChar";
+
+type FieldProps = Record<string,string>;
+
+export function Field({selectedChar, field, label}:FieldProps) {
+    return(
+        <li className="list-group-item d-flex justify-content-between">
+        <span className="term">{label}</span>
+        <span>{selectedChar[field as keyof typeof Field]}</span>
+    </li>
+    )
+}
 
 interface CharDetailProps {
     selectedChar: iPerson;
+    children?: React.ReactNode;
 }
 
 
-const CharDetails:React.FC<CharDetailProps> = ({selectedChar}) => {
+const CharDetails:React.FC<CharDetailProps> = ({selectedChar, children}) => {
     let className = "char-details rounded";
     if (Object.keys(selectedChar).length !== 0) {
         className += ' char-details__active';
     }
-    
+
     return (
         <div className={className}>
-                <h4>{selectedChar?.name}</h4>
+                <h4>{selectedChar.name}</h4>
                 <ul className="list-group list-group-flush">
-                    <li className="list-group-item d-flex justify-content-between">
-                        <span className="term">Gender</span>
-                        <span>{selectedChar?.gender}</span>
-                    </li>
-                    <li className="list-group-item d-flex justify-content-between">
-                        <span className="term">Born</span>
-                        <span>{selectedChar?.born}</span>
-                    </li>
-                    <li className="list-group-item d-flex justify-content-between">
-                        <span className="term">Died</span>
-                        <span>{selectedChar?.died}</span>
-                    </li>
-                    <li className="list-group-item d-flex justify-content-between">
-                        <span className="term">Culture</span>
-                        <span>{selectedChar?.culture}</span>
-                    </li>
+                    {React.Children.map(children, (child: any)  => {
+                        return (
+                           React.cloneElement(child,{selectedChar})
+                        )
+                    })}
                 </ul>
             </div>
     );

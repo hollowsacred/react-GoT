@@ -1,13 +1,15 @@
 import { useEffect, useState } from "react";
+import { IItems } from "../../App";
 import GotService from "../../services/GotService";
 import ErrorMessage from "../ErrorMessage/ErrorMessage";
 
- export interface iPerson {
-    name: string,
-    gender: string,
-    born: string,
-    died: string,
-    culture: string,
+ export type iPerson = {
+    name?: string,
+    gender?: string,
+    born?: string,
+    died?: string,
+    culture?: string,
+    url?: string,
 
 }
 
@@ -19,10 +21,10 @@ interface ViewProps {
 }
 
 
-export function checkNull(person: iPerson) {
+export function checkNull(person: IItems) {
     for (let [key, value] of Object.entries(person)) {
         if (!value) {
-            person[key as keyof iPerson] = "Данные Отсутствуют";
+            person[key as keyof IItems] = "Данные Отсутствуют";
            
         }
 }
