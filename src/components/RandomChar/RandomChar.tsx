@@ -13,7 +13,10 @@ import ErrorMessage from "../ErrorMessage/ErrorMessage";
 
 }
 
+
+
 interface IRandomCharProps {
+    interval?: number;
 }
 
 interface ViewProps {
@@ -21,7 +24,7 @@ interface ViewProps {
 }
 
 
-export function checkNull(person: IItems) {
+export function checkNull<T extends IItems>(person: T) {
     for (let [key, value] of Object.entries(person)) {
         if (!value) {
             person[key as keyof IItems] = "Данные Отсутствуют";
@@ -33,8 +36,8 @@ export function checkNull(person: IItems) {
 
 let serviceObj = new GotService();
 
-const RandomChar:React.FC = () => {
- 
+const RandomChar:React.FC<IRandomCharProps> = ({interval}) => {
+
     const [person, setPerson] = useState<iPerson>({} as iPerson);
     const [loading, setLoad] = useState(true);
     const [error, setError] = useState(false);
@@ -46,10 +49,10 @@ const RandomChar:React.FC = () => {
             setLoad(false);
         }).catch(onError);
 
-       },2000);
+       },interval);
        return () => {clearInterval(timerid); console.log('unmount')};
        
-        // setInterval(() => changePerson().then(res => setPerson(res)),5000);
+  
     },[])
 
     
@@ -58,9 +61,7 @@ const RandomChar:React.FC = () => {
         setError(true);
         setLoad(true);
     }
-    // function getRandomIndex(): number {
-    //     return Math.floor(Math.random() * 100);
-    // }
+
 
    async function changePerson() {
     console.log('update');
@@ -69,12 +70,6 @@ const RandomChar:React.FC = () => {
         let person = await serviceObj.getCharacter<iPerson>(id);
        
         checkNull(person);
-        // for (let [key, value] of Object.entries(person)) {
-        //         if (!value) {
-        //             person[key as keyof iPerson] = "Данные Отсутствуют";
-                   
-        //         }
-        // }
 
         return person;
     }
@@ -116,5 +111,8 @@ const View:React.FC<ViewProps> = ({person}) => {
         </ul>
         </>
     )
+}
+RandomChar.defaultProps = {
+    interval: 5000,
 }
 export default RandomChar;

@@ -13,6 +13,7 @@ export function Field({selectedChar, field, label}:FieldProps) {
     )
 }
 
+
 interface CharDetailProps {
     selectedChar: iPerson;
     children?: React.ReactNode;
@@ -20,10 +21,13 @@ interface CharDetailProps {
 
 
 const CharDetails:React.FC<CharDetailProps> = ({selectedChar, children}) => {
-    let className = "char-details rounded";
-    if (Object.keys(selectedChar).length !== 0) {
-        className += ' char-details__active';
+    let className = "char-details rounded char-details__active";
+
+    if (!selectedChar) {
+        return (<div style={{color: 'white', fontSize:30}}>Select item in the list</div>);
     }
+
+    if (Object.entries(selectedChar).length === 0) return <div>Загрузка...</div>
 
     return (
         <div className={className}>

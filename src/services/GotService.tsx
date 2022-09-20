@@ -13,18 +13,24 @@ class GotService {
         return result;
     }
 
-    getCharacter = <T,> (id: string | number) => {
+    getCharacter = <T,>(id: string | number) => {
         return this.fetchGetData<T>(`/characters/${id}`);
     }
     getAllCharacters = <T,>() => {
         return this.fetchGetData<T>('/characters?page=2&pageSize=11');
     }
-    getAllBooks = <T,> () => {
+    getBook = <T,>(id: string | undefined) => {
+        return this.fetchGetData<T>(`/books/${id}`);
+    }
+    getAllBooks = <T,>() => {
         return this.fetchGetData<T>('/books?page=1&pageSize=11');
-        }
-    getAllHouses = <T,> () => {
-        return this.fetchGetData<T>('/books?page=1&pageSize=11');
-    }    
+    }
+    getHouse = <T,>(id: string | number) => {
+        return this.fetchGetData<T>(`/houses/${id}`);
+    }
+    getAllHouses = <T,>() => {
+        return this.fetchGetData<T>('/houses?page=1&pageSize=11');
+    }
 }
 
 export default GotService;

@@ -5,9 +5,10 @@
 @import './charDetails';
 
 body {
-    background: url('https://images2.alphacoders.com/517/517167.jpg') center no-repeat;
+    background: url('https://images2.alphacoders.com/517/517167.jpg') center center no-repeat;
     background-size: cover;
-    height: 100vh;
+    height: 100%;
+    min-height: 1080px;
 }
 
 .app a {
