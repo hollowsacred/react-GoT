@@ -1,18 +1,10 @@
-import { throws } from 'assert';
+
 import React from 'react';
-import { IBook, IItems } from '../../../App';
-import { InjectedProps } from '../../../hoc/text';
+import { InjectedProps } from '../../../hoc/withData';
 import GotService from '../../../services/GotService';
-import CharDetails, { Field } from '../../CharDetails/CharDetails';
 import ErrorMessage from '../../ErrorMessage/ErrorMessage';
 import ItemList from '../../ItemList/ItemList';
-import {checkNull, iPerson} from '../../RandomChar/RandomChar';
-import RowBlock from '../../RowBlock/RowBlock';
-
-// export type TypeState = {
-//     item: object,
-//     stateError: boolean
-// }
+import {iPerson} from '../../RandomChar/RandomChar';
 
 
 interface ICharacterPage extends InjectedProps {}

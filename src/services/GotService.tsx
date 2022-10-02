@@ -7,7 +7,7 @@ class GotService {
     async fetchGetData<T>(url: string): Promise<T> {
         let response = await fetch(`${this.apiBase}${url}`);
         if (!response.ok) {
-            throw new Error('ты балбесмагагаг ' + response.url + response.status)
+            throw new Error('ты балбес' + response.url + response.status)
         }
         let result = await response.json();
         return result;
@@ -34,3 +34,6 @@ class GotService {
 }
 
 export default GotService;
+
+
+

@@ -1,17 +1,15 @@
-import React from "react";
-import { JsxElement } from "typescript";
-import CharacterPage from "../components/Pages/CharacterPage/CharacterPage";
+import React from "react"; 
 
 import { checkNull } from "../components/RandomChar/RandomChar";
 
 
-type state = {
+type TypeState = {
     item: object,
     stateError: boolean,
 }
 
 export interface InjectedProps {
-    stateProp: state,
+    stateProp: TypeState,
     selectItem: <T extends object>(item: T) => void,
 }
 
@@ -33,11 +31,10 @@ const withData = (WrappedComponent: React.ComponentType<InjectedProps>) => {
     }
 
     render() {
-      return <WrappedComponent stateProp={this.state} selectItem={this.selectItem}/>;
+      return <WrappedComponent stateProp={this.state} selectItem={this.selectItem.bind(this)}/>;
     }
   };
 };
 
 export default withData;
 
-const CharacterPageWith = withData(CharacterPage)

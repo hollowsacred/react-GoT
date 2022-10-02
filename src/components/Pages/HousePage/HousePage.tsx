@@ -1,14 +1,18 @@
 import React from 'react';
-import {IHouses} from '../../../App';
-import { InjectedProps } from '../../../hoc/text';
+import { InjectedProps } from '../../../hoc/withData';
 import GotService from '../../../services/GotService';
-import CharDetails, { Field } from '../../CharDetails/CharDetails';
 import ErrorMessage from '../../ErrorMessage/ErrorMessage';
 import ItemList from '../../ItemList/ItemList';
-import { checkNull } from '../../RandomChar/RandomChar';
-import RowBlock from '../../RowBlock/RowBlock';
 
 
+export type IHouses = {
+    url: string,
+    name: string,
+    region: string,
+    coatOfArms: string,
+    words: string,
+    
+  }
 
 interface IHousePage extends InjectedProps {}
 

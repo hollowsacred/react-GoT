@@ -1,6 +1,5 @@
 import React from 'react';
-import { IBook, IHouses, IItems } from "../../App";
-import { iPerson } from "../RandomChar/RandomChar";
+
 
 type FieldProps = Record<string,string>;
 
@@ -14,8 +13,10 @@ export function Field({selectedChar, field, label}:FieldProps) {
 }
 
 
+export type TypeSelectedItem = {name: string};
+
 interface CharDetailProps {
-    selectedChar: iPerson;
+    selectedChar: TypeSelectedItem;
     children?: React.ReactNode;
 }
 

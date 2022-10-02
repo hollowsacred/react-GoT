@@ -1,14 +1,20 @@
 import React from 'react'
-import { IBook } from '../../../App';
-import { InjectedProps } from '../../../hoc/text';
+// import { IBook } from '../../../App';
+import { InjectedProps } from '../../../hoc/withData';
 import GotService from '../../../services/GotService';
-import CharDetails, { Field } from '../../CharDetails/CharDetails';
 import ErrorMessage from '../../ErrorMessage/ErrorMessage';
 import ItemList from '../../ItemList/ItemList';
-import { checkNull, iPerson } from '../../RandomChar/RandomChar';
-import RowBlock from '../../RowBlock/RowBlock';
 
 
+export type IBook = {
+  url: string;
+  name: string;
+  authors: [];
+  numberOfPages: number | string;
+  publisher: string;
+  country: string;
+  mediaType: string;
+}
 
 
 interface IBookPageProps extends InjectedProps {}
